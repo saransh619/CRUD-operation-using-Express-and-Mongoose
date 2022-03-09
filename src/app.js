@@ -5,6 +5,9 @@ const User = require("./models/usermessage");
 const hbs = require("hbs");
 const app = express();
 const port = process.env.PORT || 5000;
+hbs.registerHelper('json', function (content) {
+    return JSON.stringify(content);
+});
 
 //setting the path
 const staticpath = path.join(__dirname, "../public");
@@ -24,7 +27,7 @@ app.get("/", (req,res)=>{
         // console.log(usersinfo); //fetch all data from database in terminal
         if(err) throw err;
     res.render("index",{
-        usersinfo:usersinfo
+        usersinfo:usersinfo,
     });
 }); 
 // .sort({"name":1}); sorting the data by ascending order
